@@ -1,22 +1,89 @@
+---
+const { background, leftHref, rightHref } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Portafolio ❤️</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Portafolio ❤️</title>
+  </head>
+  <body>
+    <div class="wall" style={`background-image: url(${background});`}>
+      <!-- Slot for page-specific content (holds, overlays, etc.) -->
+      <slot />
+
+      <!-- Navigation arrows -->
+      <a class="nav left" href={leftHref} aria-label="Previous wall">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </a>
+
+      <a class="nav right" href={rightHref} aria-label="Next wall">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </a>
+    </div>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wall {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Navigation arrows */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.nav:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+.nav.left {
+  left: 20px;
+}
+
+.nav.right {
+  right: 20px;
+}
+
+/* Icon style */
+.icon {
+  width: 32px;
+  height: 32px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 </style>
