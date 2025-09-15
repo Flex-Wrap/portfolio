@@ -1,90 +1,100 @@
 ---
 ---
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Welcome | Aaron B. Sanchez</title>
-    <style>
-      body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #000; /* dark background */
-        overflow: hidden;
-        font-family: 'Inter', sans-serif;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | Aaron B. Sanchez</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
 
-      h1 {
-        font-size: 2rem;
-        white-space: nowrap;
-        border-right: 3px solid white;
-        width: 0;
-        overflow: hidden;
-        color: white;
-        position: relative;
-        z-index: 1;
-        animation: typing 3s steps(20, end) forwards, blink 0.7s step-end infinite;
-      }
+    h1 {
+      font-size: 2rem;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      width: 0;
+      overflow: hidden;
+      color: white;
+      position: relative;
+      z-index: 10;
+      animation: typing 3s steps(20, end) forwards, blink 0.7s step-end infinite;
+    }
 
-      @keyframes typing {
-        from { width: 0 }
-        to { width: 16ch } /* "Aaron B. Sanchez" length */
-      }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 16ch; } /* length of "Aaron B. Sanchez" */
+    }
 
-      @keyframes blink {
-        from, to { border-color: transparent }
-        50% { border-color: white }
-      }
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: white; }
+    }
 
-      /* Circle overlay */
-      .circle {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200vmax;   /* big enough to cover screen */
-        height: 200vmax;
-        border-radius: 50%;
-        background: white;
-        transform: scale(0);
-        transform-origin: top left;
-        z-index: 2;
-        mix-blend-mode: difference; /* invert colors under circle */
-        pointer-events: none;
-      }
+    /* Circle overlay */
+    .circle {
+      position: fixed;
+      width: 420vmax;
+      height: 370vmax;
+      border-radius: 50%;
+      transform: scale(0);
+      z-index: 5;
+      pointer-events: none;
+      mix-blend-mode: difference; /* invert colors under circle */
+    }
 
-      .circle.grow {
-        animation: grow 4s forwards;
-      }
+    .grow {
+      animation: grow 4s forwards;
+    }
 
-      @keyframes grow {
-        to {
-          transform: scale(1);
+    @keyframes grow {
+      to { transform: scale(0.75); }
+    }
+
+    /* Circle colors and origins */
+    #circle1 { top: 0; left: 0; background: rgb(211, 211, 0); transform-origin: top left; translate: -50% -50%;}
+    #circle2 { bottom: 0; left: 0; background: rgb(9, 9, 151); transform-origin: bottom left; translate: -50% 50%; }
+    #circle3 { bottom: 0; right: 0; background: rgb(146, 3, 3); transform-origin: bottom right; translate: 50% 50%;}
+  </style>
+</head>
+<body>
+  <h1 id="intro">Aaron B. Sanchez</h1>
+
+  <div id="circle1" class="circle"></div>
+  <div id="circle2" class="circle"></div>
+  <div id="circle3" class="circle"></div>
+
+  <script>
+    const circles = [
+      { el: document.getElementById('circle1'), delay: 0 },
+      { el: document.getElementById('circle2'), delay: 400 },
+      { el: document.getElementById('circle3'), delay: 1100 }
+    ];
+
+    // Wait for typing animation to finish (3s) + small pause
+    setTimeout(() => {
+      circles.forEach(({ el, delay }) => {
+        if(el){
+          setTimeout(() => {
+            el.classList.add('grow');
+          }, delay);
         }
-      }
-    </style>
-  </head>
-  <body>
-    <h1 id="intro">Aaron B. Sanchez</h1>
-    <div id="circle" class="circle"></div>
+      });
 
-    <script>
-      const circle = document.getElementById('circle');
-
-      // wait for typing animation to finish (3s + 0.5s pause)
+      // Redirect after the longest circle animation finishes
       setTimeout(() => {
-        if (circle) {
-          circle.classList.add('grow');
-        }
-
-        // after circle finishes growing, redirect
-        setTimeout(() => {
-          window.location.href = '/wall1';
-        }, 2000); // grow duration
-      }, 3500);
-    </script>
-  </body>
+        window.location.href = '/wall1';
+      }, 10000); // typing + circle growth buffer
+    }, 3500);
+  </script>
+</body>
 </html>
