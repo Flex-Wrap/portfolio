@@ -27,17 +27,12 @@
       color: white;
       position: relative;
       z-index: 10;
-      animation: typing 3s steps(20, end) forwards, blink 0.7s step-end infinite;
+      animation: typing 3s steps(20, end) forwards;
     }
 
     @keyframes typing {
       from { width: 0; }
       to { width: 16ch; } /* length of "Aaron B. Sanchez" */
-    }
-
-    @keyframes blink {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: white; }
     }
 
     /* Circle overlay */
@@ -93,7 +88,7 @@
       // Redirect after the longest circle animation finishes
       setTimeout(() => {
         window.location.href = '/wall1';
-      }, 10000); // typing + circle growth buffer
+      }, 6000); // typing + circle growth buffer
     }, 3500);
   </script>
 </body>

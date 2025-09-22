@@ -1,0 +1,88 @@
+/* Color variables */
+:root {
+  --color-red: #e63946;
+  --color-blue: #457b9d;
+  --color-purple: #6a4c93;
+  --color-black: #1d1d1d;
+  --color-hover-border: yellow; /* hover border stays yellow */
+}
+
+/* Dot overlay */
+.dot-overlay {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: var(--dot-color, var(--color-red));
+  border: 2px solid var(--dot-color, var(--color-red));
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* Hover only when dot is not open */
+.dot-overlay:not(.open):hover {
+  border-color: var(--color-hover-border);
+}
+
+/* Expanded overlay */
+.dot-overlay.open {
+  top: 50% !important;
+  left: 50% !important;
+  width: 70%;
+  height: 70%;
+  border-radius: 10px;
+  background: white;
+  overflow: visible;
+  z-index: 100;
+}
+
+/* Scrollable content */
+.dot-overlay-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  overflow-y: auto;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE & Edge */
+}
+
+.dot-overlay-content::-webkit-scrollbar {
+  display: none;               /* Chrome/Safari */
+}
+
+.dot-overlay-content h1,
+.dot-overlay-content h2,
+.dot-overlay-content p {
+  margin: 0 0 1rem 0;          /* controlled spacing */
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+/* Back button */
+.back-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--dot-color, var(--color-red));
+  color: white;
+  border-radius: 8px;
+  background: var(--dot-color, var(--color-red));
+  cursor: pointer;
+  translate: 0% 120%;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+}
+
+.back-btn:active {
+  transform: scale(0.95);
+}

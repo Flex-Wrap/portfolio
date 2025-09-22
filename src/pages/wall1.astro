@@ -1,13 +1,24 @@
 ---
-import PageTitle from '../components/PageTitle.astro';
-import WallLayout from '../layouts/WallLayout.astro';
-import background from '../assets/climbing-wall.jpg';
+import PageTitle from "../components/PageTitle.astro";
+import WallLayout from "../layouts/WallLayout.astro";
+import background from "../assets/climbing-wall.jpg";
+import DotOverlay from "../components/DotOverlay";
+import "../components/DotOverlay.css";
 ---
 
-<WallLayout 
-  leftHref="/wall3" 
-  rightHref="/wall2" 
-  background={background}
->
-  <PageTitle title="Wall number 1"/>
+<WallLayout leftHref="/wall3" rightHref="/wall2" background={background}>
+  <div class="example-bb"></div>
+  <PageTitle title="Wall number 1" />
+  <DotOverlay client:only="react" x="30%" y="40%" color="blue">
+    <h1>Project Name</h1>
+    <p>Description of the project</p>
+  </DotOverlay>
+  <DotOverlay client:only="react" x="60%" y="70%" color="purple">
+    <h1>Project Name</h1>
+    <p>Description of the project</p>
+  </DotOverlay>
+  <DotOverlay client:only="react" x="50%" y="20%">
+    <h1>Project Name</h1>
+    <p>Description of the project</p>
+  </DotOverlay>
 </WallLayout>
