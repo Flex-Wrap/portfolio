@@ -1,24 +1,22 @@
 ---
-import PageTitle from "../components/PageTitle.astro";
 import WallLayout from "../layouts/WallLayout.astro";
 import background from "../assets/climbing-wall.jpg";
 import DotOverlay from "../components/DotOverlay";
 import "../components/DotOverlay.css";
+import * as CPHFFW from "../projects/CPHFW/Sections.astro";
 ---
 
 <WallLayout leftHref="/wall3" rightHref="/wall2" background={background}>
-  <div class="example-bb"></div>
-  <PageTitle title="Wall number 1" />
-  <DotOverlay client:only="react" x="30%" y="40%" color="blue">
-    <h1>Project Name</h1>
-    <p>Description of the project</p>
+  <DotOverlay client:visible x="20%" y="80%" color="blue">
+    <CPHFFW.Description />
   </DotOverlay>
-  <DotOverlay client:only="react" x="60%" y="70%" color="purple">
-    <h1>Project Name</h1>
-    <p>Description of the project</p>
+  <DotOverlay client:visible x="30%" y="70%" color="blue">
+    <CPHFFW.Research />
   </DotOverlay>
-  <DotOverlay client:only="react" x="50%" y="20%">
-    <h1>Project Name</h1>
-    <p>Description of the project</p>
+  <DotOverlay client:visible x="40%" y="50%" color="blue">
+    <CPHFFW.Design />
+  </DotOverlay>
+  <DotOverlay client:visible x="50%" y="40%" color="blue">
+    <CPHFFW.Implementation />
   </DotOverlay>
 </WallLayout>
