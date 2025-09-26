@@ -1,10 +1,19 @@
 ---
-import WallLayout from '../layouts/WallLayout.astro';
-import background from '../assets/wall2.jpg';
+import WallLayout from "../layouts/WallLayout.astro";
+import background from "../assets/wall2.jpg";
+import DotOverlay from "../components/DotOverlay";
+import MeOverlay from "../components/MeOverlay";
+import * as CPHFFW from "../projects/CPHFW/Sections.astro";
 ---
-<WallLayout
-  leftHref="/wall1"
-  rightHref="/wall3"
-  background={background}
->
+
+<WallLayout leftHref="/wall1" rightHref="/wall3" background={background}>
+
+  <!-- MeOverlay stays fixed -->
+  <MeOverlay position="left" client:load />
+
+  <!-- DotOverlay wrapped in Astro fragment, hydrated -->
+  <DotOverlay x="12%" y="73%" color="red" client:load>
+    <CPHFFW.Description />
+  </DotOverlay>
+
 </WallLayout>

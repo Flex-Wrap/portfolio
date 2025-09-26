@@ -1,3 +1,4 @@
+import "./DotOverlay.css";
 import React, { type ReactNode, useState } from "react";
 
 type ColorScheme = "red" | "blue" | "purple" | "black";

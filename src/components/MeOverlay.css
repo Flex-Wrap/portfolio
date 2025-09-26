@@ -1,0 +1,76 @@
+.me-png-container {
+  position: fixed;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  height: 400px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.6s ease-in-out, width 0.6s ease-in-out, height 0.6s ease-in-out;
+}
+
+.me-png-container.open {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 70%;
+  height: 70%;
+  border-radius: 10px;
+  background: white;
+  overflow: visible;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+}
+
+.me-png-container.open img {
+  display: none;
+}
+
+.me-png-container img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.me-png-container img:hover {
+  filter:
+    drop-shadow( 1px  0   0 yellow)
+    drop-shadow(-1px  0   0 yellow)
+    drop-shadow( 0   1px 0 yellow)
+    drop-shadow( 0  -1px 0 yellow)
+    drop-shadow( 1px  1px 0 yellow)
+    drop-shadow(-1px -1px 0 yellow)
+    drop-shadow( 1px -1px 0 yellow)
+    drop-shadow(-1px  1px 0 yellow);
+  transform: scale(1.05);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Optional: reuse DotOverlay content styling for scrollable content */
+.dot-overlay-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dot-overlay-content::-webkit-scrollbar {
+  display: none;
+}
+
+.back-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  color: white;
+  border-radius: 8px;
+  background: black;
+  cursor: pointer;
+}
