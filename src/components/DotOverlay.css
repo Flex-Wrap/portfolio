@@ -1,7 +1,7 @@
 /* Color variables */
 :root {
-  --color-red: #e63946;
-  --color-blue: #457b9d;
+  --color-red: rgb(174, 22, 34);
+  --color-blue: #294896;
   --color-purple: #6a4c93;
   --color-black: #1d1d1d;
   --color-hover-border: yellow; /* hover border stays yellow */

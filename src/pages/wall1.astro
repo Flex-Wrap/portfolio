@@ -1,22 +1,40 @@
 ---
 import WallLayout from "../layouts/WallLayout.astro";
-import background from "../assets/climbing-wall.jpg";
+import background from "../assets/wall1.jpg";
 import DotOverlay from "../components/DotOverlay";
 import "../components/DotOverlay.css";
 import * as CPHFFW from "../projects/CPHFW/Sections.astro";
+import "./me.css";
+import MePng from "../assets/middle.png";
 ---
 
 <WallLayout leftHref="/wall3" rightHref="/wall2" background={background}>
-  <DotOverlay client:visible x="20%" y="80%" color="blue">
+  <DotOverlay client:visible x="12%" y="73%" color="red">
     <CPHFFW.Description />
   </DotOverlay>
-  <DotOverlay client:visible x="30%" y="70%" color="blue">
+  <DotOverlay client:visible x="20%" y="57%" color="red">
     <CPHFFW.Research />
   </DotOverlay>
-  <DotOverlay client:visible x="40%" y="50%" color="blue">
+  <DotOverlay client:visible x="15%" y="48%" color="red">
     <CPHFFW.Design />
   </DotOverlay>
-  <DotOverlay client:visible x="50%" y="40%" color="blue">
+  <DotOverlay client:visible x="22%" y="30%" color="red">
+    <CPHFFW.Implementation />
+  </DotOverlay>
+  <div class="me-png-container">
+    <img src={MePng.src} alt="Me" height="400px"/>
+  </div>
+
+    <DotOverlay client:visible x="65%" y="78%" color="blue">
+    <CPHFFW.Description />
+  </DotOverlay>
+  <DotOverlay client:visible x="66%" y="63%" color="blue">
+    <CPHFFW.Research />
+  </DotOverlay>
+  <DotOverlay client:visible x="66%" y="25%" color="blue">
+    <CPHFFW.Design />
+  </DotOverlay>
+  <DotOverlay client:visible x="85%" y="10%" color="blue">
     <CPHFFW.Implementation />
   </DotOverlay>
 </WallLayout>

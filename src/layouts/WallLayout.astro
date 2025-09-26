@@ -10,9 +10,19 @@ const { background, leftHref, rightHref } = Astro.props;
     <title>Portfolio ❤️</title>
   </head>
   <body>
-    <div class="wall" style={`background-image: url('${background.src}');`}>
-      <slot />
+    <div class="wall">
+      <!-- Container that defines scrollable width -->
+      <div class="img-container">
+        <!-- Background image -->
+        <img src={background.src} alt="Background" class="wall-bg" />
 
+        <!-- Overlay that matches the scaled image -->
+        <div class="img-overlay">
+          <slot />
+        </div>
+      </div>
+
+      <!-- Navigation -->
       <a class="nav left" href={leftHref} aria-label="Previous wall">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -54,30 +64,47 @@ const { background, leftHref, rightHref } = Astro.props;
     position: relative;
     width: 100%;
     height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-  }
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+    overflow-x: scroll; /* allow horizontal scroll */
+    overflow-y: hidden; /* prevent vertical scroll */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE & Edge */
   }
 
-  .wall {
+  .wall::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .img-container {
     position: relative;
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
+    height: 100%;
+    display: inline-block; /* width = image width */
+    min-width: 100%; /* at least fill viewport */
+
+  }
+
+  .wall-bg,
+  .img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%; /* fill container height */
+    width: auto; /* width scales from height + aspect ratio */
+    min-width: 100%; /* at least fill viewport */
+  }
+
+  .wall-bg {
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .img-overlay {
+    z-index: 1;
   }
 
   /* Navigation arrows */
   .nav {
-    position: absolute;
+    position: fixed; /* stay in viewport */
     top: 50%;
     transform: translateY(-50%);
     width: 60px;
@@ -106,7 +133,6 @@ const { background, leftHref, rightHref } = Astro.props;
     right: 20px;
   }
 
-  /* Icon style */
   .icon {
     width: 32px;
     height: 32px;
@@ -114,3 +140,32 @@ const { background, leftHref, rightHref } = Astro.props;
     stroke-linejoin: round;
   }
 </style>
+
+<script is:inline>
+(() => {
+  const wall = document.querySelector(".wall");
+  const container = wall.querySelector(".img-container");
+  const img = container.querySelector(".wall-bg");
+  const overlay = container.querySelector(".img-overlay");
+  if (!img || !overlay || !wall) return;
+
+  function syncOverlay() {
+    const rect = img.getBoundingClientRect();
+    overlay.style.width = rect.width + "px";
+    overlay.style.height = rect.height + "px";
+
+    // Center the horizontal scroll
+    const scrollLeft = (container.offsetWidth - wall.clientWidth) / 2;
+    wall.scrollLeft = scrollLeft;
+  }
+
+  function onReady() {
+    syncOverlay();
+    new ResizeObserver(syncOverlay).observe(img);
+    window.addEventListener("resize", syncOverlay);
+  }
+
+  if (img.complete) onReady();
+  else img.addEventListener("load", onReady);
+})();
+</script>
