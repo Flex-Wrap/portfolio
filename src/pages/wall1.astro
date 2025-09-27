@@ -3,35 +3,36 @@ import WallLayout from "../layouts/WallLayout.astro";
 import background from "../assets/wall1.jpg";
 import DotOverlay from "../components/DotOverlay";
 import * as CPHFFW from "../projects/CPHFW/Sections.astro";
+import * as BG from "../projects/BotanicalGarden/Sections.astro";
 
 import MeOverlay from "../components/MeOverlay";
 ---
 
 <WallLayout leftHref="/wall3" rightHref="/wall2" background={background}>
-  <DotOverlay client:visible x="12%" y="73%" color="red">
+  <DotOverlay client:load x="12%" y="73%" color="red">
     <CPHFFW.Description />
   </DotOverlay>
-  <DotOverlay client:visible x="20%" y="57%" color="red">
+  <DotOverlay client:load x="20%" y="57%" color="red">
     <CPHFFW.Research />
   </DotOverlay>
-  <DotOverlay client:visible x="15%" y="48%" color="red">
+  <DotOverlay client:load x="15%" y="48%" color="red">
     <CPHFFW.Design />
   </DotOverlay>
-  <DotOverlay client:visible x="22%" y="30%" color="red">
+  <DotOverlay client:load x="22%" y="30%" color="red">
     <CPHFFW.Implementation />
   </DotOverlay>
-  <MeOverlay position="middle" client:visible/>
+  <MeOverlay position="middle" client:load/>
 
-    <DotOverlay client:visible x="65%" y="78%" color="blue">
-    <CPHFFW.Description />
+    <DotOverlay client:load x="65%" y="78%" color="blue">
+    <BG.Description />
   </DotOverlay>
-  <DotOverlay client:visible x="66%" y="63%" color="blue">
-    <CPHFFW.Research />
+  <DotOverlay client:load x="66%" y="63%" color="blue">
+    <BG.Research />
   </DotOverlay>
-  <DotOverlay client:visible x="66%" y="25%" color="blue">
-    <CPHFFW.Design />
+  <DotOverlay client:load x="66%" y="25%" color="blue">
+    <BG.Design />
   </DotOverlay>
-  <DotOverlay client:visible x="85%" y="10%" color="blue">
-    <CPHFFW.Implementation />
+  <DotOverlay client:load x="85%" y="10%" color="blue">
+    <BG.Implementation />
   </DotOverlay>
 </WallLayout>
